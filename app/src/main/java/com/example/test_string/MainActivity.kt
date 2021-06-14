@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import com.dzungvu.restring.core.RestringApp
 import com.example.test_string.bases.BaseActivity
 
 class MainActivity : BaseActivity() {
@@ -23,5 +24,15 @@ class MainActivity : BaseActivity() {
             val intent = Intent(this, SecondActivity::class.java)
             startActivity(intent)
         }
+
+        val data = mutableMapOf<String, Map<String, String>>()
+        val en = mutableMapOf<String, Map<String, String>>(
+            Pair(
+                "en",
+                mutableMapOf(Pair("hello", "xin chao"), Pair("app_name", "restring"))
+            )
+        )
+        data.putAll(en)
+        RestringApp.getInstance().injectData(data)
     }
 }

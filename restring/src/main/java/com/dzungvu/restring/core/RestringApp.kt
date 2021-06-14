@@ -1,6 +1,8 @@
 package com.dzungvu.restring.core
 
 import android.content.Context
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dzungvu.restring.core.resource_holder.StringHolder
 import com.dzungvu.restring.exceptions.RestringNotFoundException
@@ -9,7 +11,9 @@ import java.util.*
 
 class RestringApp private constructor() : RestringAppApi {
 
-    var currentLanguage = MutableLiveData<String>()
+    private val curLan: MutableLiveData<String> = MutableLiveData()
+    val currentLanguage: LiveData<String>
+    get() = curLan
 
     companion object {
         private var instance: RestringApp? = null
@@ -27,10 +31,9 @@ class RestringApp private constructor() : RestringAppApi {
     }
 
     init {
-        currentLanguage.postValue(getDefaultLanguage())
+        curLan.value = getDefaultLanguage()
         loadStringResourceFromInternalStorageToCache()
     }
-
 
     private fun loadStringResourceFromInternalStorageToCache() {
 
@@ -58,7 +61,7 @@ class RestringApp private constructor() : RestringAppApi {
     }
 
     override fun setLanguage(locale: String) {
-        currentLanguage.postValue(locale)
+        curLan.postValue(locale)
     }
 
     override fun getLanguage(): String = currentLanguage.value ?: getDefaultLanguage()
