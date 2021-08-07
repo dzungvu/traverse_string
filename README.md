@@ -38,3 +38,5 @@ Map<languageId: String, Map<stringId: String, stringValue: String>>
 
 The key of stringId should be the same as stringId in your strings.xml file. Otherwise, it's won't work correctly.
 With stringId that is not exist in the data you input, then it would take the string in strings.xml file.
+
+If you want to know more about how this library work, see my [Medium](https://thdng-39982.medium.com/android-development-handle-set-text-for-android-app-ac93dc3a1522) for detail.
